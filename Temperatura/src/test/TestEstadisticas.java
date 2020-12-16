@@ -7,7 +7,7 @@ import static modelo.Estadisticas.calcularPromedio;
 
 public class TestEstadisticas {
     public static void main(String[] args) {
-        Double[] numeros = new Double[] { 1.0, 3.0, 2.0, 4.0, 5.0 };
+        Double[] numeros = new Double[]{1.0, 3.0, 2.0, 4.0, 5.0};
 
         double promedio = calcularPromedio.apply(numeros);
         double minimo = calcularMaximo.apply(numeros);

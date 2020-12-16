@@ -16,7 +16,7 @@ public class Estadisticas {
             sumarTodosLosDatos = reducir(Double::sum);
 
     public static final Function<Double[], Double>
-        calcularPromedio = datos -> sumarTodosLosDatos.apply(datos) / datos.length;
+            calcularPromedio = datos -> sumarTodosLosDatos.apply(datos) / datos.length;
 
     public static final Function<Double[], Double>
             calcularMinimo = reducir(Math::min);
