@@ -1,13 +1,13 @@
 package modelo;
 
 public class Mes {
-    private final float[] temperaturasDeLaSemana;
+    private final Double[] temperaturasDeLaSemana;
 
-    public Mes(float[] temperaturasDeLaSemana) {
+    public Mes(Double[] temperaturasDeLaSemana) {
         this.temperaturasDeLaSemana = temperaturasDeLaSemana.clone();
     }
 
-    public float[] getTemperaturasDeLaSemana() {
+    public Double[] getTemperaturasDeLaSemana() {
         return temperaturasDeLaSemana.clone();
     }
 }
