@@ -1,18 +1,20 @@
 package test;
 
 import modelo.LectorDeMeses;
-import modelo.LectorDeMesesDesdeCLI;
+import modelo.LectorDeMesesDesdeArchivo;
+
+import java.io.FileNotFoundException;
 
 import static modelo.Estadisticas.*;
 import static modelo.LectorDeMeses.*;
 import static modelo.OperadoresDeListas.map;
 
 public class ProbarLectorDeMeses {
-    public static void main(String[] args) {
-        probar(new LectorDeMesesDesdeCLI());
+    public static void main(String[] args) throws FileNotFoundException {
+        probar(new LectorDeMesesDesdeArchivo("temperaturas.txt"));
     }
 
-    public static void probar(LectorDeMeses lector) {
+    public static void probar(LectorDeMeses lector) throws FileNotFoundException {
         Double[][] meses = lector.leer();
 
         Double[] promediosMensuales = map(calcularPromedio, meses, Double[]::new);

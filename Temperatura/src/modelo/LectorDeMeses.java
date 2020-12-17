@@ -1,7 +1,9 @@
 package modelo;
 
+import java.io.FileNotFoundException;
+
 public interface LectorDeMeses {
-    Double[][] leer();
+    Double[][] leer() throws FileNotFoundException;
 
     String[] NOMBRES_DE_MESES = new String[]{
             "Enero",
