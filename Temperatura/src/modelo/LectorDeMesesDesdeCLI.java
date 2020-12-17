@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Scanner;
 
-public class LeerMesesDesdeCLI implements LectorDeMeses {
+public class LectorDeMesesDesdeCLI implements LectorDeMeses {
 
     private static String pedirDatos(int numeroDeMes, int numeroDeSemana) {
         return "Ingresar temperatura de la semana "

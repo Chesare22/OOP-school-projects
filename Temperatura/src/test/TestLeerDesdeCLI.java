@@ -1,7 +1,7 @@
 package test;
 
 import modelo.LectorDeMeses;
-import modelo.LeerMesesDesdeCLI;
+import modelo.LectorDeMesesDesdeCLI;
 
 import static modelo.Estadisticas.*;
 import static modelo.LectorDeMeses.*;
@@ -9,7 +9,7 @@ import static modelo.OperadoresDeListas.map;
 
 public class TestLeerDesdeCLI {
     public static void main(String[] args) {
-        LectorDeMeses lector = new LeerMesesDesdeCLI();
+        LectorDeMeses lector = new LectorDeMesesDesdeCLI();
         Double[][] meses = lector.leer();
 
         Double[] promediosMensuales = map(calcularPromedio, meses, Double[]::new);
