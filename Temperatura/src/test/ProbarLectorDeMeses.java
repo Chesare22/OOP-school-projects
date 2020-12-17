@@ -7,9 +7,12 @@ import static modelo.Estadisticas.*;
 import static modelo.LectorDeMeses.*;
 import static modelo.OperadoresDeListas.map;
 
-public class TestLeerDesdeCLI {
+public class ProbarLectorDeMeses {
     public static void main(String[] args) {
-        LectorDeMeses lector = new LectorDeMesesDesdeCLI();
+        probar(new LectorDeMesesDesdeCLI());
+    }
+
+    public static void probar(LectorDeMeses lector) {
         Double[][] meses = lector.leer();
 
         Double[] promediosMensuales = map(calcularPromedio, meses, Double[]::new);
