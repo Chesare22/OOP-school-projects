@@ -3,7 +3,7 @@ package modelo;
 import java.io.FileNotFoundException;
 
 public interface LectorDeTemperaturas {
-    Double[][] leerTemperaturasSemanalesDeLosDoceMeses() throws FileNotFoundException;
+    Double[][] leerTemperaturas() throws FileNotFoundException;
 
     String[] NOMBRES_DE_MESES = new String[]{
             "Enero",

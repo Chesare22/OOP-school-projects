@@ -13,7 +13,7 @@ public class LectorDeTemperaturasDesdeArchivo implements LectorDeTemperaturas {
     }
 
     @Override
-    public Double[][] leerTemperaturasSemanalesDeLosDoceMeses() throws FileNotFoundException {
+    public Double[][] leerTemperaturas() throws FileNotFoundException {
         Scanner reader = new Scanner(new File(nombreDeArchivo));
         Double[][] temperaturasSemanalesPorMes = new Double[NUMERO_DE_MESES][SEMANAS_EN_UN_MES];
 

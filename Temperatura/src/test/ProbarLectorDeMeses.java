@@ -15,7 +15,7 @@ public class ProbarLectorDeMeses {
     }
 
     public static void probar(LectorDeTemperaturas lector) throws FileNotFoundException {
-        Double[][] temperaturasSemanalesPorMes = lector.leerTemperaturasSemanalesDeLosDoceMeses();
+        Double[][] temperaturasSemanalesPorMes = lector.leerTemperaturas();
 
         Double[] promediosMensuales = map(calcularPromedio, temperaturasSemanalesPorMes, Double[]::new);
         Double[] temperaturasMinimas = map(calcularMinimo, temperaturasSemanalesPorMes, Double[]::new);

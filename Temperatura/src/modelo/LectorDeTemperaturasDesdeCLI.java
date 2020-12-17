@@ -13,7 +13,7 @@ public class LectorDeTemperaturasDesdeCLI implements LectorDeTemperaturas {
     }
 
     @Override
-    public Double[][] leerTemperaturasSemanalesDeLosDoceMeses() {
+    public Double[][] leerTemperaturas() {
         Scanner scanner = new Scanner(System.in);
         Double[][] temperaturasSemanalesPorMes = new Double[NUMERO_DE_MESES][SEMANAS_EN_UN_MES];
 
