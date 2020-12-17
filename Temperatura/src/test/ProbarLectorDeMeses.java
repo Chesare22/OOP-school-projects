@@ -1,31 +1,31 @@
 package test;
 
-import modelo.LectorDeMeses;
-import modelo.LectorDeMesesDesdeArchivo;
+import modelo.LectorDeTemperaturas;
+import modelo.LectorDeTemperaturasDesdeArchivo;
 
 import java.io.FileNotFoundException;
 
 import static modelo.Estadisticas.*;
-import static modelo.LectorDeMeses.*;
+import static modelo.LectorDeTemperaturas.*;
 import static modelo.OperadoresDeListas.map;
 
 public class ProbarLectorDeMeses {
     public static void main(String[] args) throws FileNotFoundException {
-        probar(new LectorDeMesesDesdeArchivo("temperaturas.txt"));
+        probar(new LectorDeTemperaturasDesdeArchivo("temperaturas.txt"));
     }
 
-    public static void probar(LectorDeMeses lector) throws FileNotFoundException {
-        Double[][] meses = lector.leer();
+    public static void probar(LectorDeTemperaturas lector) throws FileNotFoundException {
+        Double[][] temperaturasSemanalesPorMes = lector.leerTemperaturasSemanalesDeLosDoceMeses();
 
-        Double[] promediosMensuales = map(calcularPromedio, meses, Double[]::new);
-        Double[] temperaturasMinimas = map(calcularMinimo, meses, Double[]::new);
-        Double[] temperaturasMaximas = map(calcularMaximo, meses, Double[]::new);
+        Double[] promediosMensuales = map(calcularPromedio, temperaturasSemanalesPorMes, Double[]::new);
+        Double[] temperaturasMinimas = map(calcularMinimo, temperaturasSemanalesPorMes, Double[]::new);
+        Double[] temperaturasMaximas = map(calcularMaximo, temperaturasSemanalesPorMes, Double[]::new);
 
 
         for (int i = 0; i < NUMERO_DE_MESES; i++) {
             StringBuilder temperaturasSemanales = new StringBuilder();
             for (int j = 0; j < SEMANAS_EN_UN_MES; j++) {
-                temperaturasSemanales.append(meses[i][j]).append("  ");
+                temperaturasSemanales.append(temperaturasSemanalesPorMes[i][j]).append("  ");
             }
 
             System.out.println("Temperaturas del mes de " + NOMBRES_DE_MESES[i] + ": " + temperaturasSemanales);

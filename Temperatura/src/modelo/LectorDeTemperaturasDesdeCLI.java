@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Scanner;
 
-public class LectorDeMesesDesdeCLI implements LectorDeMeses {
+public class LectorDeTemperaturasDesdeCLI implements LectorDeTemperaturas {
 
     private static String pedirDatos(int numeroDeMes, int numeroDeSemana) {
         return "Ingresar temperatura de la semana "
@@ -13,17 +13,17 @@ public class LectorDeMesesDesdeCLI implements LectorDeMeses {
     }
 
     @Override
-    public Double[][] leer() {
+    public Double[][] leerTemperaturasSemanalesDeLosDoceMeses() {
         Scanner scanner = new Scanner(System.in);
-        Double[][] meses = new Double[NUMERO_DE_MESES][SEMANAS_EN_UN_MES];
+        Double[][] temperaturasSemanalesPorMes = new Double[NUMERO_DE_MESES][SEMANAS_EN_UN_MES];
 
         for (int i = 0; i < NUMERO_DE_MESES; i++) {
             for (int j = 0; j < SEMANAS_EN_UN_MES; j++) {
                 System.out.print(pedirDatos(i, j));
-                meses[i][j] = scanner.nextDouble();
+                temperaturasSemanalesPorMes[i][j] = scanner.nextDouble();
             }
         }
 
-        return meses;
+        return temperaturasSemanalesPorMes;
     }
 }
