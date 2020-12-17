@@ -3,27 +3,19 @@ package test;
 import modelo.LectorDeMeses;
 import modelo.LeerMesesDesdeCLI;
 
-import java.util.Arrays;
-
 import static modelo.Estadisticas.*;
 import static modelo.LectorDeMeses.*;
+import static modelo.OperadoresDeListas.map;
 
 public class TestLeerDesdeCLI {
     public static void main(String[] args) {
         LectorDeMeses lector = new LeerMesesDesdeCLI();
         Double[][] meses = lector.leer();
 
-        Double[] promediosMensuales = Arrays.stream(meses)
-                .map(calcularPromedio)
-                .toArray(Double[]::new);
+        Double[] promediosMensuales = map(calcularPromedio, meses, Double[]::new);
+        Double[] temperaturasMinimas = map(calcularMinimo, meses, Double[]::new);
+        Double[] temperaturasMaximas = map(calcularMaximo, meses, Double[]::new);
 
-        Double[] temperaturasMinimas = Arrays.stream(meses)
-                .map(calcularMinimo)
-                .toArray(Double[]::new);
-
-        Double[] temperaturasMaximas = Arrays.stream(meses)
-                .map(calcularMaximo)
-                .toArray(Double[]::new);
 
         for (int i = 0; i < NUMERO_DE_MESES; i++) {
             StringBuilder temperaturasSemanales = new StringBuilder();
