@@ -19,6 +19,10 @@ public class Circulo {
         return Math.PI * Math.pow(radio, 2);
     }
 
+    public double getVolumen() {
+        return Math.PI * Math.pow(radio, 3) * 4 / 3;
+    }
+
     public double getRadio() {
         return radio;
     }
