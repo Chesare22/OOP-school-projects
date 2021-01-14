@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import modelo.Cliente;
 import vista.VistaCliente;
@@ -16,37 +14,23 @@ import vista.VistaCliente;
  * @author lbojor
  */
 public class ControlCliente implements ActionListener {
-    private Cliente modeloCliente;
-    private VistaCliente vistaCliente;
+    private final Cliente modeloCliente;
+    private final VistaCliente vistaCliente;
 
     public ControlCliente(Cliente modeloCliente, VistaCliente vistaCliente) {
         this.modeloCliente = modeloCliente;
         this.vistaCliente = vistaCliente;
 
-        this.vistaCliente.getjButton1().addActionListener(this);
-        this.vistaCliente.getjButton2().addActionListener(this);
-        this.vistaCliente.getjButton3().addActionListener(this);
-        this.vistaCliente.getjButton4().addActionListener(this);
+        this.vistaCliente.getInsertarButton().addActionListener(this);
+        this.vistaCliente.getEliminarButton().addActionListener(this);
+        this.vistaCliente.getConsultarButton().addActionListener(this);
+        this.vistaCliente.getModificarButton().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
         //Insertar Cliente
-        if (vistaCliente.getjButton1() == evento.getSource()) {
-            int claveCliente;
-            String nombreCliente;
-            Date fechaIngreso;
-            String activo;
-
-            claveCliente = Integer.parseInt(vistaCliente.getjTextField1().getText());
-            nombreCliente = vistaCliente.getjTextField2().getText();
-            fechaIngreso = new Date(01 - 10 - 2018);
-            activo = vistaCliente.getjCheckBox1().getText();
-
-            modeloCliente.setClaveCliente(claveCliente);
-            modeloCliente.setNombre(nombreCliente);
-            modeloCliente.setFechaIngreso(fechaIngreso);
-            modeloCliente.setActivo(true);
-
+        if (vistaCliente.getInsertarButton() == evento.getSource()) {
+            actualizarModelo();
             DAOCliente daoCliente = new DAOCliente();
             try {
                 daoCliente.agregar(modeloCliente);
@@ -56,69 +40,56 @@ public class ControlCliente implements ActionListener {
         }
 
         //Eliminar Cliente
-        if (vistaCliente.getjButton2() == evento.getSource()) {
-            int claveCliente;
-            String condicion;
-            claveCliente = Integer.parseInt(vistaCliente.getjTextField1().getText());
-            condicion = " id_clientes = " + claveCliente;
-
+        if (vistaCliente.getEliminarButton() == evento.getSource()) {
             DAOCliente daoCliente = new DAOCliente();
             try {
-                daoCliente.eliminar(condicion);
+                daoCliente.eliminar(" id_clientes = " + getClaveCliente());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         //Modificar Cliente
-        if (vistaCliente.getjButton4() == evento.getSource()) {
-            int claveCliente;
-            String nombreCliente;
-            Date fechaIngreso;
-            String activo;
-            String condicion;
-
-            claveCliente = Integer.parseInt(vistaCliente.getjTextField1().getText());
-            nombreCliente = vistaCliente.getjTextField2().getText();
-            fechaIngreso = new Date(01 - 10 - 2018);
-            activo = vistaCliente.getjCheckBox1().getText();
-
-            modeloCliente.setClaveCliente(claveCliente);
-            modeloCliente.setNombre(nombreCliente);
-            modeloCliente.setFechaIngreso(fechaIngreso);
-            modeloCliente.setActivo(true);
-
-            claveCliente = Integer.parseInt(vistaCliente.getjTextField1().getText());
-            condicion = " id_clientes = " + claveCliente;
-
+        if (vistaCliente.getModificarButton() == evento.getSource()) {
+            actualizarModelo();
             DAOCliente daoCliente = new DAOCliente();
             try {
-                daoCliente.modificar(modeloCliente, condicion);
+                daoCliente.modificar(modeloCliente, " id_clientes = " + getClaveCliente());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         //Consultar Cliente
-        if (vistaCliente.getjButton3() == evento.getSource()) {
-            ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-            int claveCliente;
-            String condicion;
-
-            claveCliente = Integer.parseInt(vistaCliente.getjTextField1().getText());
-            condicion = " id_clientes = " + claveCliente;
+        if (vistaCliente.getConsultarButton() == evento.getSource()) {
             DAOCliente daoCliente = new DAOCliente();
+            ArrayList<Cliente> clientes = new ArrayList<>();
             try {
-                listaClientes = daoCliente.consultar(condicion);
+                clientes = daoCliente.consultar(" id_clientes = " + getClaveCliente());
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            Cliente cliente = listaClientes.get(0);
-            vistaCliente.getjTextField2().setText(cliente.getNombre());
+            Cliente cliente = clientes.get(0);
+            vistaCliente.getNombreField().setText(cliente.getNombre());
             vistaCliente.getjFormattedTextField1().setText(String.valueOf(cliente.getFechaIngreso()));
             vistaCliente.getjCheckBox1().setSelected(cliente.isActivo());
         }
 
+    }
+
+    private void actualizarModelo() {
+        modeloCliente.setClaveCliente(getClaveCliente());
+        modeloCliente.setNombre(getNombreCliente());
+        modeloCliente.setFechaIngreso(new Date(01 - 10 - 2018));
+        modeloCliente.setActivo(true);
+    }
+
+    private String getNombreCliente() {
+        return vistaCliente.getNombreField().getText();
+    }
+
+    private int getClaveCliente() {
+        return Integer.parseInt(vistaCliente.getClaveField().getText());
     }
 }

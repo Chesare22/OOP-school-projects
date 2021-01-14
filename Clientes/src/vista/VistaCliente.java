@@ -145,19 +145,19 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
 
-    public JButton getjButton1() {
+    public JButton getInsertarButton() {
         return jButton1;
     }
 
-    public JButton getjButton2() {
+    public JButton getEliminarButton() {
         return jButton2;
     }
 
-    public JButton getjButton3() {
+    public JButton getConsultarButton() {
         return jButton3;
     }
 
-    public JButton getjButton4() {
+    public JButton getModificarButton() {
         return jButton4;
     }
 
@@ -169,11 +169,11 @@ public class VistaCliente extends javax.swing.JFrame {
         return jFormattedTextField1;
     }
 
-    public JTextField getjTextField1() {
+    public JTextField getClaveField() {
         return jTextField1;
     }
 
-    public JTextField getjTextField2() {
+    public JTextField getNombreField() {
         return jTextField2;
     }
 }
