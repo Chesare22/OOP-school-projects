@@ -71,7 +71,7 @@ public class ControlCliente implements ActionListener {
             Cliente cliente = clientes.get().get(0);
             vistaCliente.getNombreField().setText(cliente.getNombre());
             vistaCliente.getFechaTextField().setText(String.valueOf(cliente.getFechaIngreso()));
-            vistaCliente.isActiveCheckbox().setSelected(cliente.isActivo());
+            vistaCliente.getIsActiveCheckbox().setSelected(cliente.isActivo());
         }
 
     }

@@ -1,9 +1,6 @@
 package vista;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * @author lbojor
@@ -31,13 +28,13 @@ public class VistaCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        isActiveCheckbox = new javax.swing.JCheckBox();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        guardarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
+        consultaraButton = new javax.swing.JButton();
+        salirButton = new javax.swing.JButton();
+        modificarButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CATÁLOGO DE CLIENTES");
@@ -48,20 +45,20 @@ public class VistaCliente extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha Ingreso:");
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("Activo");
+        isActiveCheckbox.setSelected(true);
+        isActiveCheckbox.setText("Activo");
 
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
-        jButton1.setText("Guardar");
+        guardarButton.setText("Guardar");
 
-        jButton2.setText("Eliminar");
+        eliminarButton.setText("Eliminar");
 
-        jButton3.setText("Consultar");
+        consultaraButton.setText("Consultar");
 
-        jButton4.setText("Salir");
+        salirButton.setText("Salir");
 
-        jToggleButton1.setText("Eliminar");
+        modificarButton.setText("Modificar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,15 +68,15 @@ public class VistaCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton1)
+                                                .addComponent(guardarButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton2)
+                                                .addComponent(eliminarButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton3)
+                                                .addComponent(consultaraButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jToggleButton1)
+                                                .addComponent(modificarButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -91,7 +88,7 @@ public class VistaCliente extends javax.swing.JFrame {
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(jCheckBox1))
+                                                                .addComponent(isActiveCheckbox))
                                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -109,15 +106,15 @@ public class VistaCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
-                                        .addComponent(jCheckBox1)
+                                        .addComponent(isActiveCheckbox)
                                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1)
-                                        .addComponent(jButton2)
-                                        .addComponent(jButton3)
-                                        .addComponent(jButton4)
-                                        .addComponent(jToggleButton1))
+                                        .addComponent(guardarButton)
+                                        .addComponent(eliminarButton)
+                                        .addComponent(consultaraButton)
+                                        .addComponent(salirButton)
+                                        .addComponent(modificarButton))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -132,37 +129,37 @@ public class VistaCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new VistaCliente().setVisible(true));
     }
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton guardarButton;
+    private javax.swing.JButton eliminarButton;
+    private javax.swing.JButton consultaraButton;
+    private javax.swing.JButton salirButton;
+    private javax.swing.JCheckBox isActiveCheckbox;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton modificarButton;
 
     public JButton getInsertarButton() {
-        return jButton1;
+        return guardarButton;
     }
 
     public JButton getEliminarButton() {
-        return jButton2;
+        return eliminarButton;
     }
 
     public JButton getConsultarButton() {
-        return jButton3;
+        return consultaraButton;
     }
 
-    public JButton getModificarButton() {
-        return jButton4;
+    public JToggleButton getModificarButton() {
+        return modificarButton;
     }
 
-    public JCheckBox isActiveCheckbox() {
-        return jCheckBox1;
+    public JCheckBox getIsActiveCheckbox() {
+        return isActiveCheckbox;
     }
 
     public JFormattedTextField getFechaTextField() {
