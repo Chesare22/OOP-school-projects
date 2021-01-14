@@ -79,7 +79,7 @@ public class ControlCliente implements ActionListener {
     private void actualizarModelo() {
         modeloCliente.setClaveCliente(getClaveCliente());
         modeloCliente.setNombre(getNombreCliente());
-        modeloCliente.setFechaIngreso(new Date(01 - 10 - 2018));
+        modeloCliente.setFechaIngreso(new Date(1 - 10 - 2018));
         modeloCliente.setActivo(true);
     }
 
