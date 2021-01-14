@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static util.RunnableWithException.defaultTryCatch;
 
 /**
  * @author lbojor
@@ -21,13 +24,11 @@ public abstract class DAOGeneral<T> {
     }
 
     public void loadDriver() {
-        try {
-            if (!isDriverLoaded) {
+        if (!isDriverLoaded){
+            defaultTryCatch(()-> {
                 Class.forName("com.mysql.jdbc.Driver");
                 isDriverLoaded = true;
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+            });
         }
     }
 
@@ -35,13 +36,12 @@ public abstract class DAOGeneral<T> {
         String urlConnection = "jdbc:mysql://" + host + "/" + bd +
                 "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(urlConnection, login, password);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return connection;
+        AtomicReference<Connection> connection = new AtomicReference<>(null);
+        defaultTryCatch(()-> {
+            connection.set(DriverManager.getConnection(urlConnection, login, password));
+        });
+
+        return connection.get();
     }
 
     public Connection getConnection() {
@@ -54,13 +54,11 @@ public abstract class DAOGeneral<T> {
     }
 
     public void closeConnection(Connection connection) {
-        try {
+        defaultTryCatch(()-> {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        });
     }
 
 
@@ -71,5 +69,5 @@ public abstract class DAOGeneral<T> {
     public abstract int modificar(T entidad, String condición) throws SQLException;
 
     public abstract ArrayList<T> consultar(String condición) throws SQLException;
-}    
+}
 

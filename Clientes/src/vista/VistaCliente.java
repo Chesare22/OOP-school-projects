@@ -161,11 +161,11 @@ public class VistaCliente extends javax.swing.JFrame {
         return jButton4;
     }
 
-    public JCheckBox getjCheckBox1() {
+    public JCheckBox isActiveCheckbox() {
         return jCheckBox1;
     }
 
-    public JFormattedTextField getjFormattedTextField1() {
+    public JFormattedTextField getFechaTextField() {
         return jFormattedTextField1;
     }
 

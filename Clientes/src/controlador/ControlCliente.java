@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 import modelo.Cliente;
 import vista.VistaCliente;
+import static util.RunnableWithException.defaultTryCatch;
 
 /**
  * @author lbojor
@@ -32,48 +34,44 @@ public class ControlCliente implements ActionListener {
         if (vistaCliente.getInsertarButton() == evento.getSource()) {
             actualizarModelo();
             DAOCliente daoCliente = new DAOCliente();
-            try {
+
+            defaultTryCatch(() -> {
                 daoCliente.agregar(modeloCliente);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            });
         }
 
         //Eliminar Cliente
         if (vistaCliente.getEliminarButton() == evento.getSource()) {
             DAOCliente daoCliente = new DAOCliente();
-            try {
+
+            defaultTryCatch(() -> {
                 daoCliente.eliminar(" id_clientes = " + getClaveCliente());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            });
         }
 
         //Modificar Cliente
         if (vistaCliente.getModificarButton() == evento.getSource()) {
             actualizarModelo();
             DAOCliente daoCliente = new DAOCliente();
-            try {
+
+            defaultTryCatch(() -> {
                 daoCliente.modificar(modeloCliente, " id_clientes = " + getClaveCliente());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            });
         }
 
         //Consultar Cliente
         if (vistaCliente.getConsultarButton() == evento.getSource()) {
             DAOCliente daoCliente = new DAOCliente();
-            ArrayList<Cliente> clientes = new ArrayList<>();
-            try {
-                clientes = daoCliente.consultar(" id_clientes = " + getClaveCliente());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            AtomicReference<ArrayList<Cliente>> clientes = new AtomicReference<>(new ArrayList<>());
 
-            Cliente cliente = clientes.get(0);
+            defaultTryCatch(()-> {
+                clientes.set(daoCliente.consultar(" id_clientes = " + getClaveCliente()));
+            });
+
+            Cliente cliente = clientes.get().get(0);
             vistaCliente.getNombreField().setText(cliente.getNombre());
-            vistaCliente.getjFormattedTextField1().setText(String.valueOf(cliente.getFechaIngreso()));
-            vistaCliente.getjCheckBox1().setSelected(cliente.isActivo());
+            vistaCliente.getFechaTextField().setText(String.valueOf(cliente.getFechaIngreso()));
+            vistaCliente.isActiveCheckbox().setSelected(cliente.isActivo());
         }
 
     }
