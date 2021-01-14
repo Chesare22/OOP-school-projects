@@ -9,80 +9,67 @@ import java.util.ArrayList;
  * @author lbojor
  */
 public abstract class DAOGeneral<T> {
-    private String host = "localhost:3306";
-    private String bd = "ventas";
-    private String login = "root";
-    private String password = "root";
-    private boolean cargadoDriver;
+    private static final String DEFAULT_HOST = "localhost:3306";
+    private static final String DEFAULT_DB = "ventas";
+    private static final String DEFAULT_USER = "root";
+    private static final String DEFAULT_PASSWORD = "root";
+
+    private boolean isDriverLoaded;
 
     public DAOGeneral() {
-        cargarDriver();
+        loadDriver();
     }
 
-    public void cargarDriver() {
+    public void loadDriver() {
         try {
-            if (!cargadoDriver) {
+            if (!isDriverLoaded) {
                 Class.forName("com.mysql.jdbc.Driver");
-                cargadoDriver = true;
+                isDriverLoaded = true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
-    public Connection getConeccion(String host, String bd, String login, String password) {
-        Connection conexion = null;
-        String urlConexion = "jdbc:mysql://" + host + "/" + bd +
+    public Connection getConnection(String host, String bd, String login, String password) {
+        String urlConnection = "jdbc:mysql://" + host + "/" + bd +
                 "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+        Connection connection = null;
         try {
-            conexion = DriverManager.getConnection(urlConexion, login, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            connection = DriverManager.getConnection(urlConnection, login, password);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
-        return conexion;
+        return connection;
     }
 
-    public Connection getConeccion() {
-        return getConeccion(host, bd, login, password);
+    public Connection getConnection() {
+        return getConnection(
+                DEFAULT_HOST,
+                DEFAULT_DB,
+                DEFAULT_USER,
+                DEFAULT_PASSWORD
+        );
     }
 
-    public void cerrarConeccion(Connection con) {
+    public void closeConnection(Connection connection) {
         try {
-            if (con != null)
-                if (!con.isClosed())    // Si no esta cerrada, se cierra
-                    con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
     }
 
 
     public abstract int agregar(T entidad) throws SQLException;
 
-    public abstract int eliminar(String condicion) throws SQLException;
+    public abstract int eliminar(String condición) throws SQLException;
 
-    public abstract int modificar(T entidad, String condicion) throws SQLException;
+    public abstract int modificar(T entidad, String condición) throws SQLException;
 
-    public abstract ArrayList<T> consultar(String condicion) throws SQLException;
-
-    public String getHost() {
-        return host;
-    }
-
-    public String getBd() {
-        return bd;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public boolean isCargadoDriver() {
-        return cargadoDriver;
-    }
+    public abstract ArrayList<T> consultar(String condición) throws SQLException;
 }    
 

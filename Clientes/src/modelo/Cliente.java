@@ -6,13 +6,13 @@ import java.sql.Date;
  * @author lbojor
  */
 public class Cliente {
-    int claveCliente;
-    String nombre;
-    Date fechaIngreso;
-    boolean activo;
+    private int claveCliente;
+    private String nombre;
+    private Date fechaIngreso;
+    private boolean activo;
 
-    public Cliente(int id_clientes, String nombre, Date fechaIngreso, boolean activo) {
-        this.claveCliente = id_clientes;
+    public Cliente(int claveCliente, String nombre, Date fechaIngreso, boolean activo) {
+        this.claveCliente = claveCliente;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
         this.activo = activo;
@@ -29,7 +29,6 @@ public class Cliente {
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-
 
     public int getClaveCliente() {
         return claveCliente;
