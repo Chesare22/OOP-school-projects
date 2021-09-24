@@ -1,48 +1,42 @@
 # Poyectos de POO
-Este repositorio tiene como propósito realizar las tareas de la materia "Programación Orientada a Objetos" (POO) con el profesor Edwin aplicando cosas del paradigma orientado a objetos pero con uno que otro patrón de programación funcional (FP) para mejorar la legibilidad.
 
-Es open-source para que los alumnos de la Facultad de Matemáticas UADY puedan _Comparar resultados_.
+Este repositorio tiene como propósito realizar las tareas de la materia "Programación Orientada a Objetos" (POO) pero con uno que otro patrón de programación funcional (FP).
 
-Cada directorio se destina a un proyecto, compuesto del código fuente (carpeta _src_) y una pequeña documentación (archivo _README.md_) con las instrucciones del profesor e instrucciones de cómo compilar y ejecutar el proyecto desde línea de comandos. Igual es posible copiar la carpeta _src_ en tu IDE de preferencia (_NetBeans_, _IntelliJ IDEA_ o _Eclipse_) y dejar que este lo haga. Yo codifico y ejecuto los proyectos en IntelliJ IDEA.
+Cada directorio se destina a un proyecto, compuesto del código fuente (carpeta _src_) y una pequeña documentación (archivo _README.md_) con las instrucciones del profesor e instrucciones de cómo compilar y ejecutar el proyecto desde línea de comandos. Igual es posible copiar la carpeta _src_ en tu IDE de preferencia (_NetBeans_, _IntelliJ IDEA_ o _Eclipse_) y ejecutar los proyectos desde ahí. Yo codifico y ejecuto los proyectos en IntelliJ IDEA.
 
 ## Conceptos relacionados a un estilo funcional
-A pesar de que no voy a aplicar muchos patrones funcionales, sí me gustaría explicarlos para que nadie tenga dudas al leer las tres líneas de código donde aparezcan. No es obligatorio leer todo este documento, igual pueden ver [este video](https://youtu.be/FYXpOjwYzcs) que explica los mismos conceptos (y unos cuantos más) pero en JavaScript. Otras opciones son ignorar estos conceptos y seguir usando POO, o copiar a lo desgraciado sin leer nada.
 
-El profesor va a decir cosas de POO, así que este documento no abarcará los conceptos de tal paradigma. Lo único que voy a agregar es que los métodos no estáticos solo son funciones que, además de recibir datos explícitamente mediante parámetros, recibe datos implícitamente mediante el `this` y normalmente generan efectos secundarios.
+Así como la programación orientada a objetos tiene los principios SOLID, la programación funcional tiene sus formas para lograr el desarrollo de código mantenible, robusto, etc. Este documento está muy influenciado por la plática [Functional Programming Basics In ES6 — Jeremy Fairbank](https://youtu.be/FYXpOjwYzcs), que explica los mismos conceptos (y unos cuantos más) usando JavaScript.
 
-Así como POO tiene los principios SOLID para hacer buenos programas, la FP también tiene uno que otro. En estos proyectos no se seguirán al 100% porque el propósito de la materia es aprender POO y estos principios no se apegan bien a dicho paradigma. Aún así vale la pena explorarlos.
+Los conceptos de POO deben ser abarcados por el profesor, así que no serán explicados en este documento.
 
 ### Transparencia
-Esto quiere decir que una función debe recibir todos sus datos de forma explícita (mediante parámetros). En Java, si una función puede ser estática y no depende de otras variables estáticas, entonces es transparente.
+
+Esto quiere decir que una función debe recibir todos sus datos de entrada mediante parámetros. En otras palabras, se evita el uso de `this`. En realidlad esto no es ninguna limitante, pues los métodos pueden ser vistos como funciones que además de recibir datos de forma explícita, tienen datos de forma implícita debido al `this`. Intenta ser explícito con los parámetros.
+
+Quizá te preguntes _¿cómo puedo llamar a otros métodos sin el uso de `this`?_, y la respuesta es que puedes pasar el método como parámetro. En programación funcional, las funciones también son datos. Las funciones que reciben o devuelven otras funciones se conocen como [funciones de orden superior](https://eloquentjavascript.net/05_higher_order.html). Java facilita este patrón con el [operador `::`](https://www.geeksforgeeks.org/double-colon-operator-in-java/) y las [interfaces funcionales](https://www.educative.io/edpresso/a-list-of-all-the-functional-interfaces-in-java).
+
+Pasar todos los argumentos puede ser verboso, pero técnicas como la [aplicación parcial](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#some-now-some-later) y [_point-free style_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#no-points) ayudan a mitigar esto. **Nota:** Para que la aplicación parcial sea posible es necesario que el lenguaje de programación en cuestión pueda hacer [_closures_](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/scope%20%26%20closures).
 
 ### Inmutabilidad
-Si le paso un valor por referencia a una función (ya sea un arreglo, objeto o alguna otra estructura de datos), tal valor no se verá afectado. Veamos el siguiente bloque de código:
 
-```java
-double[] numeros = new double[] { 1, 2, 3, 4, 5 };
+> El comando _GOTO_ era malvado porque hacía que nos preguntemos "¿cómo llegué a este punto en la ejecución?".
+> La mutabilidad hace que nos preguntemos "¿cómo llegué a este estado?".
+>
+> — [Jessica Joy Kerr](https://twitter.com/jessitron/status/333228687208112128)
 
-double promedio = calcularPromedio(numeros);
-double minimo = calcularMinimio(numeros);
-double maximo = calcularMaximo(numeros);
-```
+### Evitar efectos secundarios
 
-Uno esperaría que el promedio sea 3, el mínimo 1 y el máximo 5. Pero, ¿qué pasaría si en la implementación de algún método se muta el arreglo?
+Estas son funciones que no tienen efectos secundarios. Un efecto secundario puede ser imprimir datos en la consola (por ejemplo, con `System.out.println`), acceder a una variable global, usar `this`, leer o modificar una base de datos, etc.
 
-```java
-public double calcularPromedio(double[] numeros) {
-    // Guardar la suma en el primer valor para "optimizar"
-    for (int i = 1; i < numeros.length; i++) {
-        numeros[0] = numeros[i] + numeros[0];
-    }
-    
-    return numeros[0] / numeros.length;
-}
-```
+Obsérvese que las funciones puras también son transparentes, deterministas y no mutan datos.
 
-En este caso, el valor de `promedio` sería 3, pero el de `minimo` sería 2 y el `maximo` sería 15. Si solo leemos el bloque principal, no sería claro por qué obtenemos estos resultados inesperados. Pero si hubiéramos implementado `calcularPromedio` de forma que no mute el arreglo de números, no tendríamos este problema.
+Recomiendo ver la plática [Functional architecture - The pits of success — Mark Seemann](https://youtu.be/US8QG9I1XW0), pues explica los beneficios de usar funciones puras en proyectos grandes.
 
 ### Determinismo
+
 En las funciones matemáticas, dados los mismos datos de entrada siempre se tiene el mismo resultado. Una función determinista es aquella que siempre retorna el mismo valor dados los mismos argumentos. Si construimos nuestras funciones de esa forma, el comportamiento es más predecible y hay que estar pendiente de menos cosas a la vez, haciendo nuestro código más fácil de mantener. En teoría (no digo que sea una buena práctica) se podría reemplazar la invocación de una función determinista con el resultado de la misma y el programa funcionaría igual.
+
 ```java
 double[] numeros = new double[] { 1, 2, 3, 4, 5 };
 
@@ -51,61 +45,58 @@ double minimo = 1;
 double maximo = 5;
 ```
 
-### Funciones puras
-Estas son funciones que no tienen efectos secundarios. Un efecto secundario puede ser imprimir datos en la consola (por ejemplo, con `System.out.println`), acceder a una variable global, usar `this`, leer o modificar una base de datos, etc.
-
-Obsérvese que las funciones puras también son transparentes, deterministas y no mutan datos.
-
-Recomiendo ver [esta plática](https://youtu.be/US8QG9I1XW0) que explica los beneficios de las funciones puras en proyectos grandes. Es algo larga, puedes preparar palomitas antes de verla.
-
-### Funciones de orden superior
-Son funciones que reciben o devuelven otras funciones. Pasar bloques de código de un lado a otro nos brinda una flexibilidad increíble y permite reciclar bloques de código fácilmente.
-
 ### La programación funcional es declarativa
-Este es el aspecto de la programación funcional que más me llamó la atención, y le tengo algo de cariño porque una vez lo entendí me empezó a gustar el paradigma. En lugar de escribir el algoritmo para llegar a un resultado, en un programa declarativo se escribe qué resultado se desea. Recomiendo mucho el [primer capítulo de _Functional-Light-JS_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch1.md/#chapter-1-why-functional-programming), pues es el texto que me mostró por qué ese concepto es poderoso. Además, siento que mi ejemplo no le hace justicia.
 
-Imagina que se tiene un arreglo _A_ de objetos y se desean usar todos aquellos que no sean nulos. Una solución es crear un nuevo arreglo _B_ con todos los valores no-nulos de _A_. En la forma imperativa (describiendo los pasos del algoritmo) tendríamos que crear una lista, guardar los elementos no-nulos en esa lista y luego convertirla a un arreglo.
+En lugar de escribir el algoritmo para llegar a un resultado, en un programa declarativo se escribe qué resultado se desea.
+
+Por ejemplo: se tiene un arreglo **_arrayA_** de objetos y se desean usar todos aquellos que no sean nulos. Una solución es crear un nuevo arreglo **_arrayB_** con todos los valores no-nulos de **_arrayA_**. En la forma imperativa (describiendo los pasos del algoritmo) tendríamos que crear una lista, guardar los elementos no-nulos en esa lista y luego convertirla a un arreglo.
 
 ```java
-Integer[] A = new Integer[] { 1, 2, null, 3, null, 4, 5 };
+Integer[] arrayA = new Integer[] { 1, 2, null, 3, null, 4, 5 };
 
 List<Integer> listB = new ArrayList<>();
-for (Integer obj : A) {
+for (Integer obj : arrayA) {
     if (Objects.nonNull(obj)) {
         listB.add(obj);
     }
 }
 
-Integer[] B = listB.toArray(new Integer[listB.size()]);
+Integer[] arrayB = listB.toArray(new Integer[listB.size()]);
 
 // Hacer algo con B
 // ...
 ```
 
-En un código declarativo, llamamos a una función que filtre todos los objetos de acuerdo a cierto criterio. En este caso, el criterio es que el valor no sea nulo.
+En un código declarativo, llamamos a una función que filtre todos los objetos de acuerdo a cierto criterio. En java podemos usar [Stream.filter](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html).
 
 ```java
-Integer[] A = new Integer[] { 1, 2, null, 3, null, 4, 5 };
+Integer[] arrayA = new Integer[] { 1, 2, null, 3, null, 4, 5 };
 
-// Guardar todos los objetos no-nulos del arreglo A en un nuevo arreglo de tipo Integer.
-Integer[] B = filter(Objects::nonNull, A, Integer[]::new);
+
+Integer[] arrayB = Arrays.stream(arrayA)
+            .filter(Objects::nonNull)
+            .toArray(Integer[]::new);
 
 // Hacer algo con B
 // ...
-```
-
-La función `filter` solo es un wrapper del método [`Stream.filter()`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#filter-java.util.function.Predicate-) para hacer corto el ejemplo y no espantar a nadie. En otros lenguajes de programación, [como JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter), es más fácil hacer este tipo de cosas.
-
-```java
-public static <T> T[] filter(Predicate<T> f, T[] arr, IntFunction<T[]> generator) {
-    return Arrays.stream(arr)
-            .filter(f)
-            .toArray(generator);
-}
 ```
 
 ### Operadores de listas
-¿Qué tal si en lugar de escribir ciclos solo escribes qué resultado esperas? Ya vimos el operador de `filter` como un sustituto del ciclo `for` en cierto escenario. Sin embargo, este no es el único operador de esta índole. En Java, estos operadores son disponibles gracias a la clase [`java.util.Stream`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html). Oracle tiene un par de artículos ([Parte 1](https://www.oracle.com/technical-resources/articles/java/ma14-java-se-8-streams.html), [Parte 2](https://www.oracle.com/technical-resources/articles/java/architect-streams-pt2.html)) donde se exploran las acciones que permite la API.
 
-### Funciones lambda
-Esta notación nos permite, entre otras cosas, crear funciones sin necesidad de que pertenezcan a una clase. Recomiendo leer [este artículo](https://www.adictosaltrabajo.com/2015/12/04/expresiones-lambda-con-java-8/) que explica qué son y los diferentes escenarios donde se pueden usar.
+¿Qué tal si en lugar de escribir ciclos solo escribes qué resultado esperas? Ya vimos el operador de `filter` como un sustituto del ciclo `for` en cierto escenario. Sin embargo, este no es el único operador de tal índole. Por ejemplo, la función [`List.map` en _Elm_](https://package.elm-lang.org/packages/elm/core/latest/List#map) recibe una función que trabaja en elementos y la convierte en una función que trabaja en listas:
+
+```elm
+sumarDos número = número + 2
+
+sumarDos 4
+-- Resultado: 6
+
+sumarDosLista = List.map sumarDos
+
+sumarDosLista [1, 2, 3, 4, 5]
+-- Resultado: [3, 4, 5, 6, 7]
+```
+
+Estas funciones, conocidas como operadores de listas, tienen como objetivo abstraer el código encargado de hacer ciclos. Para más información sobre las ventajas de los operadores de lista, ver [A Skeptics Guide To Functional STYLE JavaScript — Jonathan Mills](https://youtu.be/oF9XTJoScOE?t=430).
+
+Existen otros operadores como `reduce`, `flatMap`, `flatten`, `zip`, etc.
