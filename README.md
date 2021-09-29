@@ -6,17 +6,19 @@ Cada directorio se destina a un proyecto, compuesto del código fuente (carpeta 
 
 ## Conceptos relacionados a un estilo funcional
 
-Así como la programación orientada a objetos tiene los principios SOLID, la programación funcional tiene sus formas para lograr el desarrollo de código mantenible, robusto, etc. Este documento está muy influenciado por la plática [Functional Programming Basics In ES6 — Jeremy Fairbank](https://youtu.be/FYXpOjwYzcs), que explica los mismos conceptos (y unos cuantos más) usando JavaScript.
+Así como la programación orientada a objetos tiene los principios SOLID, la programación funcional tiene sus formas para lograr el desarrollo de código mantenible, robusto, legible, bonito, etc.
 
 Los conceptos de POO deben ser abarcados por el profesor, así que no serán explicados en este documento.
 
 ### Transparencia
 
-Esto quiere decir que una función debe recibir todos sus datos de entrada mediante parámetros. En otras palabras, se evita el uso de `this`. En realidlad esto no es ninguna limitante, pues los métodos pueden ser vistos como funciones que además de recibir datos de forma explícita, tienen datos de forma implícita debido al `this`. Intenta ser explícito con los parámetros.
+Esto quiere decir que una función debe recibir todos sus datos de entrada mediante parámetros. En otras palabras, se evita el uso de `this`. En realidlad esto no es ninguna limitante, pues cualquier método puede ser visto como una función que además de recibir datos de forma explícita, mediante argumentos, recibe datos de forma implícita debido al `this`. A mí me funciona ser explícito al describir mis ideas.
 
 Quizá te preguntes _¿cómo puedo llamar a otros métodos sin el uso de `this`?_, y la respuesta es que puedes pasar el método como parámetro. En programación funcional, las funciones también son datos. Las funciones que reciben o devuelven otras funciones se conocen como [funciones de orden superior](https://eloquentjavascript.net/05_higher_order.html). Java facilita este patrón con el [operador `::`](https://www.geeksforgeeks.org/double-colon-operator-in-java/) y las [interfaces funcionales](https://www.educative.io/edpresso/a-list-of-all-the-functional-interfaces-in-java).
 
-Pasar todos los argumentos puede ser verboso, pero técnicas como la [aplicación parcial](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#some-now-some-later) y [_point-free style_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#no-points) ayudan a mitigar esto. **Nota:** Para que la aplicación parcial sea posible es necesario que el lenguaje de programación en cuestión pueda hacer [_closures_](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/scope%20%26%20closures).
+Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es verboso, pero técnicas como la [aplicación parcial](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#some-now-some-later), el [_point-free style_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#no-points) y la [composición de funciones](https://youtu.be/srQt1NAHYC0?t=563) ayudan a mitigar esto. Hay lenguajes como Elixir o Elm [cuya sintaxis facilita estas técnicas](https://dennisreimann.de/articles/elm-functions.html).
+
+**Nota técnica:** Para que la aplicación parcial sea posible es necesario que el lenguaje de programación en cuestión pueda hacer [_closures_](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/scope%20%26%20closures) o algo similar.
 
 ### Inmutabilidad
 
