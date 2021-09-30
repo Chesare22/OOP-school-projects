@@ -12,11 +12,11 @@ Los conceptos de POO deben ser abarcados por el profesor, así que no serán exp
 
 ### Transparencia
 
-Esto quiere decir que una función debe recibir todos sus datos de entrada mediante parámetros. En otras palabras, se evita el uso de `this`. En realidlad esto no es ninguna limitante, pues cualquier método puede ser visto como una función que además de recibir datos de forma explícita, mediante parámetros, recibe datos de forma implícita debido al `this`. A mí me funciona ser explícito al describir mis ideas.
+Esto quiere decir que una función debe recibir todos sus datos de entrada mediante parámetros. En otras palabras, se evita el uso de `this`. En realidad esto no es ninguna limitante, pues cualquier método puede ser visto como una función que además de recibir datos de forma explícita, mediante parámetros, recibe datos de forma implícita debido al `this`. A mí me funciona ser explícito al describir mis ideas.
 
 Quizá te preguntes _¿cómo puedo llamar a otros métodos sin el uso de `this`?_, y la respuesta es que puedes pasar el método como parámetro. En programación funcional, las funciones también son valores. Las funciones que reciben o devuelven otras funciones se conocen como [funciones de orden superior](https://eloquentjavascript.net/05_higher_order.html). Java facilita este patrón con el [operador `::`](https://www.geeksforgeeks.org/double-colon-operator-in-java/) y las [interfaces funcionales](https://www.educative.io/edpresso/a-list-of-all-the-functional-interfaces-in-java).
 
-Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es verboso, pero técnicas como la [aplicación parcial](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#some-now-some-later), el [_point-free style_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#no-points) y la [composición de funciones](https://youtu.be/srQt1NAHYC0?t=563) ayudan a mitigar esto. Hay lenguajes como Elixir o Elm [cuya sintaxis facilita estas técnicas](https://dennisreimann.de/articles/elm-functions.html).
+Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es verboso, pero patrones como [aplicación parcial](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#some-now-some-later), [_point-free style_](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md/#no-points) y [composición de funciones](https://youtu.be/srQt1NAHYC0?t=563) ayudan a mitigar esto. Existen lenguajes de programación como Elixir o Elm [cuya sintaxis facilita estos patrones](https://dennisreimann.de/articles/elm-functions.html).
 
 **Nota técnica:** Para que la aplicación parcial sea posible es necesario que el lenguaje de programación en cuestión pueda hacer [_closures_](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/scope%20%26%20closures) o algo similar.
 
@@ -29,11 +29,11 @@ Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es ve
 
 **TODO: Describir qué es la inmutabilidad.**
 
-Mandar un objeto mutable a un método cualquiera puede llegar a dar miedo porque no sabes si cuando ese método termine de ejecutarse tu objeto tendrá el mismo valor o no. Una forma poco optimizada de mitigarlo es mandando copias del objeto en lugar del original. Otra forma de mitigarlo es usando [estructuras de datos inmutables](https://youtu.be/Wo0qiGPSV-s).
+Mandar un objeto mutable a un método cualquiera puede llegar a dar miedo porque no siempre se sabrá el valor del objeto después de invocar el método. Una forma fácil pero poco optimizada para evitar esta situación es mandando copias del objeto. Otra forma de evitarla es con el uso de [estructuras de datos inmutables](https://youtu.be/Wo0qiGPSV-s).
 
 ### Determinismo
 
-Una función determinista es aquella que siempre retorna el mismo valor dados los mismos argumentos.
+Una función determinista es aquella que siempre calcula el mismo valor dados los mismos argumentos.
 
 **TODO: Describir por qué datos y funciones son conceptos intercambiables.**
 
@@ -43,7 +43,7 @@ Una función determinista es aquella que siempre retorna el mismo valor dados lo
 
 Obsérvese que las funciones puras también son transparentes, deterministas y no mutan datos.
 
-Recomiendo ver la plática [Functional architecture - The pits of success — Mark Seemann](https://youtu.be/US8QG9I1XW0), donde se explica cómo construir sistemas grandes formados mayormente por funciones puras.
+Recomiendo ver la plática [Functional architecture - The pits of success — Mark Seemann](https://youtu.be/US8QG9I1XW0), donde se explica cómo se pueden construir sistemas grandes formados mayormente por funciones puras.
 
 ### La programación funcional es declarativa
 
@@ -67,7 +67,7 @@ Integer[] arrayB = listB.toArray(new Integer[listB.size()]);
 // ...
 ```
 
-En un código declarativo, llamamos a una función que filtre todos los valores de acuerdo al criterio "el valor no debe ser nulo". En java podemos usar [Stream.filter](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html).
+En un código declarativo llamamos a una función que filtre todos los valores de acuerdo al criterio "el valor no debe ser nulo". En java podemos usar [Stream.filter](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html).
 
 ```java
 Integer[] arrayA = new Integer[] { 1, 2, null, 3, null, 4, 5 };
@@ -83,7 +83,7 @@ Integer[] arrayB = Arrays.stream(arrayA)
 
 ### Operadores de listas
 
-¿Qué tal si en lugar de escribir ciclos solo escribes qué resultado esperas? Ya vimos la función `filter` como un sustituto del ciclo `for` en cierto escenario. Sin embargo, esta no es la única función de tal índole. Por ejemplo, la función [`List.map` en Elm](https://package.elm-lang.org/packages/elm/core/latest/List#map) recibe una función que trabaja en elementos y la convierte en una función que trabaja en listas:
+¿Qué tal si en lugar de escribir ciclos solo escribes qué resultado esperas? Ya vimos la función `filter` como un sustituto del ciclo `for` en cierto escenario. Hay muchos otros escenarios donde los ciclos se pueden generalizar. Por ejemplo: aplicar la misma función sobre una secuencia de datos. La función [`List.map` en Elm](https://package.elm-lang.org/packages/elm/core/latest/List#map) recibe una función que trabaja en elementos y la convierte en una función que trabaja en listas:
 
 ```elm
 sumarDos número = número + 2
@@ -97,4 +97,4 @@ sumarDosLista [1, 2, 3, 4, 5]
 -- Resultado: [3, 4, 5, 6, 7]
 ```
 
-Estas funciones, conocidas como operadores de listas, tienen como objetivo abstraer el código encargado de hacer ciclos. Para más información sobre los operadores de listas, leer [Functional-Light Javascript Chapter 9](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch9.md). La plática [A Skeptics Guide To Functional STYLE JavaScript — Jonathan Mills](https://youtu.be/oF9XTJoScOE?t=430) menciona, entre otras cosas, cómo el uso ocasional de dichas funciones puede ayudar en el desarrollo de software.
+Algunas funciones, conocidas como operadores de listas, tienen como objetivo abstraer el código encargado de hacer ciclos. Para más información sobre los operadores de listas, leer [Functional-Light Javascript Chapter 9](https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch9.md). La plática [A Skeptics Guide To Functional STYLE JavaScript — Jonathan Mills](https://youtu.be/oF9XTJoScOE?t=430) menciona, entre otras cosas, cómo el uso ocasional de dichas funciones puede ayudar en el desarrollo de software.
