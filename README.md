@@ -43,13 +43,13 @@ Mandar un objeto mutable a un método cualquiera puede llegar a dar miedo porque
 
 Obsérvese que las funciones puras también son transparentes, deterministas y no mutan datos.
 
-Recomiendo ver la plática [Functional architecture - The pits of success — Mark Seemann](https://youtu.be/US8QG9I1XW0), donde se explica cómo se pueden construir sistemas grandes formados mayormente por funciones puras.
+Recomiendo ver la plática [Functional architecture - The pits of success — Mark Seemann](https://youtu.be/US8QG9I1XW0), donde explica cómo se pueden construir sistemas grandes formados mayormente por funciones puras.
 
 ### La programación funcional es declarativa
 
-En lugar de escribir el algoritmo para llegar a un resultado, en un programa declarativo se escribe qué resultado se desea.
+En lugar de escribir los pasos para llegar a un resultado, en un [paradigma declarativo](https://www.ionos.mx/digitalguide/paginas-web/desarrollo-web/programacion-declarativa/) se escribe qué resultado se desea.
 
-Por ejemplo: se tiene un arreglo de números enteros **_arrayA_** y en una parte de mi sistema deseo usar todos sus valores que no sean nulos. Una solución es crear un nuevo arreglo **_arrayB_** con todos los valores no-nulos de **_arrayA_**. En la forma imperativa (describiendo los pasos del algoritmo) tendríamos que crear una lista, guardar los elementos no-nulos en esa lista y luego convertirla a un arreglo.
+Por ejemplo: se tiene un arreglo de números enteros **_arrayA_** y en una parte de un sistema se desean usar todos sus valores que no sean nulos. Una solución es crear un nuevo arreglo **_arrayB_** con todos los valores no-nulos de **_arrayA_**. En la forma imperativa tendríamos que crear una lista, guardar los elementos no-nulos en esa lista y luego convertirla a un arreglo.
 
 ```java
 Integer[] arrayA = new Integer[] { 1, 2, null, 3, null, 4, 5 };
@@ -67,7 +67,7 @@ Integer[] arrayB = listB.toArray(new Integer[listB.size()]);
 // ...
 ```
 
-En un código declarativo llamamos a una función que filtre todos los valores de acuerdo al criterio "el valor no debe ser nulo". En java podemos usar [Stream.filter](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html).
+Una forma declarativa de solucionar este problema es llamando a una función que filtre todos los valores de acuerdo al criterio "el valor no debe ser nulo". En java podemos usar [Stream.filter](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html).
 
 ```java
 Integer[] arrayA = new Integer[] { 1, 2, null, 3, null, 4, 5 };
@@ -83,7 +83,7 @@ Integer[] arrayB = Arrays.stream(arrayA)
 
 ### Operadores de listas
 
-¿Qué tal si en lugar de escribir ciclos solo escribes qué resultado esperas? Ya vimos la función `filter` como un sustituto del ciclo `for` en cierto escenario. Hay muchos otros escenarios donde los ciclos se pueden generalizar. Por ejemplo: aplicar la misma función sobre una secuencia de datos. La función [`List.map` en Elm](https://package.elm-lang.org/packages/elm/core/latest/List#map) recibe una función que trabaja en elementos y la convierte en una función que trabaja en listas:
+¿Cuántos ciclos pueden ser reemplazados por funciones genéricas? Ya vimos la función `filter` como un sustituto del ciclo `for` en cierto escenario. Hay muchos otros escenarios donde los ciclos se pueden generalizar. Por ejemplo: aplicar la misma función sobre una secuencia de datos. La función [`List.map` en Elm](https://package.elm-lang.org/packages/elm/core/latest/List#map) recibe una función que trabaja en elementos y la convierte en una función que trabaja en listas:
 
 ```elm
 sumarDos número = número + 2
