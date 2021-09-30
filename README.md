@@ -20,6 +20,12 @@ Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es ve
 
 **Nota técnica:** Para que la aplicación parcial sea posible es necesario que el lenguaje de programación en cuestión pueda hacer [_closures_](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/scope%20%26%20closures) o algo similar.
 
+### Determinismo
+
+Una función determinista es aquella que siempre calcula el mismo valor dados los mismos argumentos.
+
+**TODO: Describir por qué datos y funciones son conceptos intercambiables.**
+
 ### Inmutabilidad
 
 > El comando _GOTO_ era malvado porque hacía que nos preguntemos "¿cómo llegué a este punto en la ejecución?".
@@ -30,12 +36,6 @@ Para algunos la sintaxis tiene mucha importancia. Al inicio ser explícito es ve
 **TODO: Describir qué es la inmutabilidad.**
 
 Mandar un objeto mutable a un método cualquiera puede llegar a dar miedo porque no siempre se sabrá el valor del objeto después de invocar el método. Una forma fácil pero poco optimizada para evitar esta situación es mandando copias del objeto. Otra forma de evitarla es con el uso de [estructuras de datos inmutables](https://youtu.be/Wo0qiGPSV-s).
-
-### Determinismo
-
-Una función determinista es aquella que siempre calcula el mismo valor dados los mismos argumentos.
-
-**TODO: Describir por qué datos y funciones son conceptos intercambiables.**
 
 ### Evitar efectos secundarios
 
