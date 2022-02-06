@@ -6,7 +6,7 @@ public class Rectángulo {
     private Coordenada superiorIzquierda;
     private Coordenada inferiorIzquierda;
 
-    private static double MAX_COORDENADA = 20;
+    private static final double MAX_COORDENADA = 20;
 
     public Rectángulo(
             Coordenada inferiorDerecha,
